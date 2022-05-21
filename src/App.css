@@ -1,0 +1,77 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.content {
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #264241;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  color: #264241;
+  width: 500px;
+  position: fixed;
+}
+.content span{
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+.content b {
+  font-size: 14px;
+}
+.content i {
+  font-size: 14px;
+  color: #666;
+}
+.content a {
+  color: #264241;
+  font-size: 12px;
+}
+.content a:visited {
+  color: #264241;
+}
+.content p{
+  color: #DFAD31;
+  font-weight: bold;
+}
+input{
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.button {
+  background: #264241;
+  border: none;
+  transition: all .5s;
+  color: #FFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.button:hover{
+  opacity: .8;
+}
+.loading{
+  background: rgb(255, 255, 255, .5);
+  position: absolute;
+  width: 95%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+.user{
+  color: #BC0701;
+  margin-bottom: 10px;
+}
