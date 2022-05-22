@@ -7,14 +7,16 @@
 }
 .content {
   padding: 20px;
-  border-radius: 10px;
-  border: 2px solid #264241;
-  background: #FFF;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #FFFAFA;
   display: flex;
   flex-direction: column;
-  color: #264241;
-  width: 500px;
+  color: #040404;
+  width: 98%;
+  max-width: 500px;
   position: fixed;
+  box-shadow: 0px 0px 15px 5px rgb(0, 0, 0, .1);
 }
 .content span{
   text-align: center;
@@ -30,11 +32,11 @@
   color: #666;
 }
 .content a {
-  color: #264241;
+  color: #040404;
   font-size: 12px;
 }
 .content a:visited {
-  color: #264241;
+  color: #040404;
 }
 .content p{
   color: #DFAD31;
@@ -49,7 +51,7 @@ input{
   box-sizing: border-box;
 }
 .button {
-  background: #264241;
+  background: #3EC8FF;
   border: none;
   transition: all .5s;
   color: #FFF;
@@ -74,4 +76,7 @@ input{
 .user{
   color: #BC0701;
   margin-bottom: 10px;
+}
+.logo{
+  text-align: center;
 }

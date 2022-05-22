@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import React, { useState } from 'react'
 import imgLoading from './assets/loading.svg'
+import logo from './assets/logo-keyrus.svg'
 
 function App() {
   const [tenant, settenant] = useState();
@@ -34,7 +35,7 @@ function App() {
         setloading(false);
       }
     }else{
-      setmessage('Check the fields');
+      setmessage('Check the fields!');
     }
   }
 
@@ -43,7 +44,7 @@ function App() {
       setmessage('');
       setloading(true)
       try {
-        const res = await api.put('/api/v1/apps/' + appId + '/space', {'spaceId': ' '});
+        const res = await api.put('/api/v1/apps/' + appId + '/space', {'spaceId': ''});
         if(res.status === 200)
           setmessage('App moved successfully!')
         else
@@ -54,7 +55,7 @@ function App() {
         setloading(false);
       }
     }else{
-      setmessage('Check the fields');
+      setmessage('Check the fields!');
     }
   }
 
@@ -64,28 +65,33 @@ function App() {
         {loading ? (<div className='loading'>
           <img src={imgLoading} alt='loading' />
         </div>) : <></>}
-            <span>Set the new space in app qlik saas</span>
+            <a className='logo' href='https://keyrus.com/br/pt/home' target='_blank' rel="noreferrer">
+              <img src={logo} alt='logo-keyrus' width={150} />
+            </a>
+            < br/>
+            <span>Set the personal space in app qlik saas</span>
+            < br/>
             <a href='https://github.com/gabriew/change-space-qlik-saas' target='_blank' rel="noreferrer">
-            application code
+            Application code
             </a>
             <br />
-            <b>your tenant</b>
+            <b>Your tenant</b>
             <input id='tenant' type='text' placeholder='https://yourtenant.us.qlikcloud.com' onChange={(e) => settenant(e.target.value)} />
-            <b>your web integration id</b>
+            <b>Your web integration id</b>
             <a href='https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-adminster-web-integrations.htm' target='_blank' rel="noreferrer">
             tutorial here
             </a>
             <input id='webIntegrationID' type='text' placeholder='1a-Abcd7845DG21g55dad9832F51j561H' onChange={(e) => setwebIntregration(e.target.value)} />
-            <b>your API Key</b>
+            <b>Your API Key</b>
             <a href='https://qlik.dev/tutorials/generate-your-first-api-key' target='_blank' rel="noreferrer">
             tutorial here
             </a>
             <input id='apiKey' type='text' placeholder='abcDEFgH4iJkLMNopq123456rStUvWxYz789' onChange={(e) => setapiKey(e.target.value)} />
             <input id='submit' className='button' type='button' value='conect tenant' onClick={() => autenticate()} />
             <br />
-            <span>first conect in your tenant</span>
+            <span>First conect in your tenant</span>
             <b className='user'>{userInfo ? 'Welcome '+ userInfo.name : ''}</b>
-            <b>your appId</b>
+            <b>Your appId</b>
             <input id='appId' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setappId(e.target.value)} />
             <input id='changeSpace' className='button' type='button' value='submit' onClick={() => changeSpace()} />
             <p>{message}</p>
