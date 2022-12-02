@@ -22,6 +22,11 @@ function App() {
     },
   });
 
+  async function loadSpaces() {
+    const res = await api.get('/api/v1/spaces');
+    console.log(res);
+  }
+
   async function autenticate() {
     if (tenant && webIntregration && apiKey) {
       setmessage('');
@@ -29,6 +34,7 @@ function App() {
       try {
         const res = await api.get('/api/v1/users/me');
         setuserInfo(res.data);
+
       } catch (error) {
         setmessage(error.message);
       } finally {
