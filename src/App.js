@@ -12,6 +12,9 @@ function App() {
   const [userInfo, setuserInfo] = useState();
   const [loading, setloading] = useState(false);
   const [message, setmessage] = useState('');
+  const [spaceIdChangeType, setspaceIdChangeType] = useState();
+  const [spaceIdClear, setspaceIdClear] = useState();
+  const [spaceType, setspaceType] = useState();
 
   const api = axios.create({
     baseURL: tenant, 
@@ -22,9 +25,46 @@ function App() {
     },
   });
 
-  async function loadSpaces() {
-    const res = await api.get('/api/v1/spaces');
-    console.log(res);
+  async function changeSpaceType() {
+    if(!spaceType || spaceType == 'type' || !spaceIdChangeType){
+      setmessage('Select the type space!')
+    }else{
+      setmessage('');
+      setloading(true)
+      try {
+        const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'type': spaceType});
+        if(res.status === 200)
+          setmessage('Space chenged successfully!')
+        else
+          setmessage('Error!')
+      } catch (error) {
+          setmessage(error.message);
+      } finally {
+        setloading(false);
+      }
+      
+    } 
+  }
+
+  async function clearSpace() {
+    if(!spaceIdClear){
+      setmessage('Check spaceId!')
+    }else{
+      setmessage('');
+      setloading(true)
+      try {
+        const res = await api.get('/api/v1/items?sort=-recentlyUsed&limit=12&spaceId=' + spaceIdClear + '&resourceSubType=directQuery,qix-df,qvd,connection_based_dataset,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automation,automl-experiment,automl-deployment&noActions=true');
+        console.log(res);
+        if(res.status === 200)
+          setmessage('Space chenged successfully!')
+        else
+          setmessage('Error!')
+      } catch (error) {
+          setmessage(error.message);
+      } finally {
+        setloading(false);
+      }
+    } 
   }
 
   async function autenticate() {
@@ -34,7 +74,6 @@ function App() {
       try {
         const res = await api.get('/api/v1/users/me');
         setuserInfo(res.data);
-        loadSpaces();
       } catch (error) {
         setmessage(error.message);
       } finally {
@@ -54,7 +93,7 @@ function App() {
         if(res.status === 200)
           setmessage('App moved successfully!')
         else
-          setmessage('Erro ao mover o App!')
+          setmessage('Error!')
       } catch (error) {
           setmessage(error.message);
       } finally {
@@ -75,7 +114,7 @@ function App() {
               <img src={logo} alt='logo-keyrus' width={150} />
             </a>
             < br/>
-            <span>Set the personal space in app qlik saas</span>
+            <span>Application used in migration projects qlik on-premises to qlik cloud. v2.0</span>
             < br/>
             <a href='https://github.com/gabriew/change-space-qlik-saas' target='_blank' rel="noreferrer">
             Application code
@@ -97,9 +136,27 @@ function App() {
             <br />
             <span>First conect in your tenant</span>
             <b className='user'>{userInfo ? 'Welcome '+ userInfo.name : ''}</b>
-            <b>Your appId</b>
-            <input id='appId' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setappId(e.target.value)} />
-            <input id='changeSpace' className='button' type='button' value='submit' onClick={() => changeSpace()} />
+            <b>Your appId (used to set personal space in app)</b>
+            <div className='inputs'>
+              <input id='appId' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setappId(e.target.value)} />
+              <input id='changeSpace' className='button' type='button' value='set' onClick={() => changeSpace()} />
+            </div>
+            <b>Your spaceId (used to change type space)</b>
+            <div className='inputs'>
+              <input id='spaceIdChangeType' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setspaceIdChangeType(e.target.value)} />
+              <select onChange={(e) => setspaceType(e.target.value)}>
+                <option value="type">select...</option> 
+                <option value="data">data</option>
+                <option value="managed">managed</option>
+                <option value="shared">shared</option>
+              </select>
+              <input id='changeSpace' className='button' type='button' value='change' onClick={() => changeSpaceType()} />
+            </div>
+            <b>Your spaceId (used to clear space)</b>
+            <div className='inputs'>
+              <input id='spaceIdClear' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setspaceIdClear(e.target.value)} />
+              <input id='changeSpace' className='button' type='button' value='clear' onClick={() => clearSpace()} />
+            </div>
             <p>{message}</p>
       </div>
     </div>
