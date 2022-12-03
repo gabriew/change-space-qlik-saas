@@ -33,7 +33,7 @@ function App() {
       setmessage('');
       setloading(true)
       try {
-        const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'name' : 'Mashup_testando','type': spaceType});
+        const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'type': spaceType});
         console.log(res.data)
         if(res.status === 200)
           setmessage('Space chenged successfully!')
@@ -55,8 +55,8 @@ function App() {
       setmessage('');
       setloading(true)
       try {
-        const res = await api.get('/api/v1/items?sort=-recentlyUsed&limit=12&spaceId=' + spaceIdClear + '&resourceSubType=directQuery,qix-df,qvd,connection_based_dataset,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automation,automl-experiment,automl-deployment&noActions=true');
-        console.log(res);
+        const res = await api.get('/api/v1/items?spaceId=' + spaceIdClear + '&resourceSubType=qvd,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automl-experiment,automl-deployment&noActions=true');
+        console.log(res.data);
         if(res.status === 200)
           setmessage('Space chenged successfully!')
         else
