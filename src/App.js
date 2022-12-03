@@ -33,8 +33,8 @@ function App() {
       setmessage('');
       setloading(true)
       try {
-        const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'SpaceType': spaceType});
-        console.log(res)
+        const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'type': spaceType});
+        console.log(res.data)
         if(res.status === 200)
           setmessage('Space chenged successfully!')
         else
