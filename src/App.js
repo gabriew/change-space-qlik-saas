@@ -55,10 +55,12 @@ function App() {
       setmessage('');
       setloading(true)
       try {
-        const res = await api.get('/api/v1/items?spaceId=' + spaceIdClear + '&resourceSubType=qvd,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automl-experiment,automl-deployment&noActions=true');
-        console.log(res.data);
+        const res = await api.get('/api/v1/items?spaceId=' + spaceIdClear + '&resourceSubType=directQuery,qix-df,qvd,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automation,automl-experiment,automl-deployment');
+        await Promise.apply(res.data.map(async item => {
+          await api.delete('/api/v1/items/' + item.id)
+        }));
         if(res.status === 200)
-          setmessage('Space chenged successfully!')
+          setmessage('Space cleared successfully!')
         else
           setmessage('Error!')
       } catch (error) {
