@@ -26,7 +26,6 @@ function App() {
   });
 
   async function changeSpaceType() {
-    console.log(spaceType);
     if(!spaceType || spaceType === 'type' || !spaceIdChangeType){
       setmessage('Select the type space!')
     }else{
@@ -34,9 +33,8 @@ function App() {
       setloading(true)
       try {
         const res = await api.put('/api/v1/spaces/' + spaceIdChangeType , {'type': spaceType});
-        console.log(res.data)
         if(res.status === 200)
-          setmessage('Space chenged successfully!')
+          setmessage('Space changed successfully!')
         else
           setmessage('Error!')
       } catch (error) {
@@ -56,7 +54,6 @@ function App() {
       setloading(true)
       try {
         const res = await api.get('/api/v1/items?spaceId=' + spaceIdClear + '&resourceSubType=directQuery,qix-df,qvd,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automation,automl-experiment,automl-deployment');
-        console.log(res.data)
         await Promise.all(res.data.data.map(async (item) => {
           await api.delete('/api/v1/items/' + item.id)
         }));
