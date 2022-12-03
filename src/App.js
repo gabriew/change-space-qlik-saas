@@ -148,9 +148,9 @@ function App() {
               <input id='spaceIdChangeType' type='text' placeholder='0a0a0a0a0a0a0a0a0a0a' onChange={(e) => setspaceIdChangeType(e.target.value)} />
               <select onChange={(e) => setspaceType(e.target.value)}>
                 <option value="type">select...</option> 
-                <option value="2">data</option>
-                <option value="1">managed</option>
-                <option value="0">shared</option>
+                <option value="data">data</option>
+                <option value="managed">managed</option>
+                <option value="shared">shared</option>
               </select>
               <input id='changeSpace' className='button' type='button' value='change' onClick={() => changeSpaceType()} />
             </div>
