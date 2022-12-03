@@ -26,7 +26,7 @@ function App() {
   });
 
   async function changeSpaceType() {
-    if(!spaceType || spaceType == 'type' || !spaceIdChangeType){
+    if(!spaceType || spaceType === 'type' || !spaceIdChangeType){
       setmessage('Select the type space!')
     }else{
       setmessage('');
