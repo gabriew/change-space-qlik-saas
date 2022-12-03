@@ -56,6 +56,7 @@ function App() {
       setloading(true)
       try {
         const res = await api.get('/api/v1/items?spaceId=' + spaceIdClear + '&resourceSubType=directQuery,qix-df,qvd,chart-monitoring,&resourceType=app,qvapp,qlikview,genericlink,sharingservicetask,dataset,note,automation,automl-experiment,automl-deployment');
+        console.log(res.data)
         await Promise.apply(res.data.map(async item => {
           await api.delete('/api/v1/items/' + item.id)
         }));
